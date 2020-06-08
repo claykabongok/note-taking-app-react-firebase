@@ -14,6 +14,7 @@ import Header from "./Header";
 import firebase from "../firebase";
 import { Link } from "react-router-dom";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import noteImage from "../static/images/coffee.jpg";
 
 const styles = (theme) => ({
   root: {
@@ -21,6 +22,7 @@ const styles = (theme) => ({
   },
   media: {
     height: 140,
+
   },
 });
 
@@ -68,6 +70,14 @@ function ViewNote(props) {
       >
         <Card className={classes.root}>
           <CardActionArea>
+            <CardMedia
+           
+             component="img"
+              className={classes.media}
+              height="200"
+              image={noteImage}
+              title="Contemplative Reptile"
+            />
             <CardContent>
               <Typography
                 gutterBottom
