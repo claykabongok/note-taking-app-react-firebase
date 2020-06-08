@@ -76,7 +76,7 @@ function ViewNote(props) {
               className={classes.media}
               height="200"
               image={noteImage}
-              title="Contemplative Reptile"
+              title="Note taing "
             />
             <CardContent>
               <Typography
