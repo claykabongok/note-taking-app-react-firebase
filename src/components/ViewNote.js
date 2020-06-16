@@ -76,7 +76,7 @@ function ViewNote(props) {
               className={classes.media}
               height="200"
               image={noteImage}
-              title="Note taing "
+              title="Note taking "
             />
             <CardContent>
               <Typography
@@ -90,6 +90,8 @@ function ViewNote(props) {
               <Typography variant="body2" color="textSecondary" component="p">
                 {notes.text}
               </Typography>
+
+              
             </CardContent>
           </CardActionArea>
           <CardActions>

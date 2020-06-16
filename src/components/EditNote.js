@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Box } from "@material-ui/core";
 import firebase from "../firebase";
 import Typography from "@material-ui/core/Typography";
 import Header from "./Header";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 function EditNote(props) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const inputRef=useRef("form");
 
   useEffect(() => {
     const docId = props.match.params.id;
@@ -61,8 +63,11 @@ function EditNote(props) {
         justifyContent="center"
         margin="40px auto "
         alignItems="center"
+
       >
-        <form
+       
+         <ValidatorForm
+          ref={inputRef}
           style={{ marginLeft: "1rem", width: "75%" }}
           onSubmit={updateNote}
         >
@@ -70,7 +75,9 @@ function EditNote(props) {
             Edit note
           </Typography>
 
-          <TextField
+          
+
+          <TextValidator
             margin="normal"
             fullWidth
             autoFocus
@@ -80,8 +87,10 @@ function EditNote(props) {
             value={title}
             onChange={handleTitleInput}
             placeholder="Title"
+            validators={["required"]}
+            errorMessages={["A title  is required, Please type something here."]}
           />
-          <TextField
+          <TextValidator
             margin="normal"
             fullWidth
             autoFocus
@@ -92,11 +101,13 @@ function EditNote(props) {
             value={text}
             onChange={handleTextInput}
             placeholder="Text"
+            validators={["required"]}
+            errorMessages={["Note required, Please type something here."]}
           />
           <Button variant="contained" color="primary" type="submit">
             Update Note
           </Button>
-        </form>
+        </ValidatorForm>
       </Box>
     </>
   );

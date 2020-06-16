@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Button from "@material-ui/core/Button";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -9,10 +9,12 @@ import AddIcon from "@material-ui/icons/Add";
 import { Box } from "@material-ui/core";
 import Header from "./Header";
 import firebase from "../firebase";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 function NewNote(props) {
   const [title, setTitle] = useState("");
   const [text, settext] = useState("");
+  const inputRef=useRef("form");
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
@@ -42,12 +44,18 @@ function NewNote(props) {
         alignItems="center"
         margin="50px auto"
       >
-        <form style={{ marginLeft: "1rem", width: "50%" }} onSubmit={addNote}>
+        <ValidatorForm
+          ref={inputRef}
+          onSubmit={addNote}
+          style={{ marginLeft: "1rem", width: "50%" }}
+          
+         
+        >
           <Typography variant="h6" color="primary">
             Add new note
           </Typography>
 
-          <TextField
+          <TextValidator
             margin="normal"
             fullWidth
             autoFocus
@@ -57,18 +65,22 @@ function NewNote(props) {
             value={title}
             onChange={handleTitleInput}
             placeholder="Title"
+            validators={["required"]}
+            errorMessages={["A title  is required, Please type something here."]}
           />
-          <TextField
+         
+          <TextValidator
             margin="normal"
             fullWidth
             autoFocus
-            multiline
             name="text"
             label="Note"
             variant="outlined"
             value={text}
             onChange={handleTextInput}
-            placeholder="Text"
+            placeholder="Note"
+            validators={["required"]}
+            errorMessages={["Note required, Please type something here."]}
           />
 
           <Button
@@ -80,7 +92,7 @@ function NewNote(props) {
           >
             Add note
           </Button>
-        </form>
+        </ValidatorForm>
       </Box>
     </>
   );

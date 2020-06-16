@@ -1,28 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import ViewNote from './components/ViewNote';
-import EditNote from './components/EditNote';
-import NewNote from './components/NewNote';
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import ViewNote from "./components/ViewNote";
+import EditNote from "./components/EditNote";
+import NewNote from "./components/NewNote";
 
 ReactDOM.render(
   <Router>
-  <div>
-    <Route exact path='/' component={App}/>
-    <Route  path='/viewnote/:id' component={ViewNote}/>
-    <Route  path='/newnote' component={NewNote}/>
-    <Route  path='/editnote/:id' component={EditNote}/>
-    
+    <div>
+      <Route exact path="/" component={App} />
+      <Route path="/viewnote/:id" component={ViewNote} />
+      <Route path="/newnote" component={NewNote} />
+      <Route path="/editnote/:id" component={EditNote} />
     </div>
-
   </Router>,
 
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

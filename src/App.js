@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-
 import "./App.css";
 import firebase from "./firebase";
 import Header from "./components/Header";
 import Notes from "./components/Notes";
 
+
 function App() {
   const [notes, Setnotes] = useState([]);
+ 
 
   useEffect(() => {
     const loadNotes = async () => {
@@ -27,8 +28,11 @@ function App() {
 
   return (
     <div class="container">
+     
       <Header />
+    
       <Notes notes={notes} />
+    
     </div>
   );
 }

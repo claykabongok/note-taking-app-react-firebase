@@ -7,6 +7,7 @@ import FlipMove from "react-flip-move";
 import { makeStyles } from "@material-ui/core/styles";
 import Note from "./Note";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Notes({ notes }) {
+
+
   const classes = useStyles();
 
   return (
