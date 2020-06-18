@@ -22,18 +22,19 @@ const styles = (theme) => ({
   },
   media: {
     height: 140,
-
   },
 });
 
 function ViewNote(props) {
   const [notes, setNotes] = useState([]);
   const [key, setKey] = useState("");
+  const userUID = firebase.auth().currentUser.uid;
+
   useEffect(() => {
     const docId = props.match.params.id;
     firebase
       .firestore()
-      .collection("notes")
+      .collection(userUID)
       .doc(docId)
       .get()
       .then((doc) => {
@@ -42,12 +43,12 @@ function ViewNote(props) {
           setKey(doc.id);
         }
       });
-  }, [props.match.params.id]);
+  }, [props.match.params.id, userUID]);
 
   function deleteNote(id) {
     firebase
       .firestore()
-      .collection("notes")
+      .collection(userUID)
       .doc(id)
       .delete()
       .then(() => {
@@ -71,8 +72,7 @@ function ViewNote(props) {
         <Card className={classes.root}>
           <CardActionArea>
             <CardMedia
-           
-             component="img"
+              component="img"
               className={classes.media}
               height="200"
               image={noteImage}
@@ -90,8 +90,6 @@ function ViewNote(props) {
               <Typography variant="body2" color="textSecondary" component="p">
                 {notes.text}
               </Typography>
-
-              
             </CardContent>
           </CardActionArea>
           <CardActions>

@@ -4,11 +4,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +44,6 @@ export default function Header() {
           <Typography edge="start" variant="h6" className={classes.title}>
             Note taking App
           </Typography>
-          
 
           <IconButton
             edge="end"
@@ -55,6 +56,17 @@ export default function Header() {
                 <AddIcon />
               </Fab>
             </Link>
+          </IconButton>
+          <IconButton
+            edge="end"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            onClick={() => firebase.auth().signOut()}
+         
+          >
+             <ExitToAppIcon />
+           
           </IconButton>
         </Toolbar>
       </AppBar>

@@ -10,13 +10,14 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 function EditNote(props) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const inputRef=useRef("form");
+  const inputRef = useRef("form");
+  const userUID = firebase.auth().currentUser.uid;
 
   useEffect(() => {
     const docId = props.match.params.id;
     firebase
       .firestore()
-      .collection("notes")
+      .collection(userUID)
       .doc(docId)
       .get()
       .then((doc) => {
@@ -26,7 +27,7 @@ function EditNote(props) {
           setText(notes.text);
         }
       });
-  }, [props.match.params.id]);
+  }, [props.match.params.id, userUID]);
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
@@ -41,7 +42,7 @@ function EditNote(props) {
     const id = props.match.params.id;
     firebase
       .firestore()
-      .collection("notes")
+      .collection(userUID)
       .doc(id)
       .set({
         title: title,
@@ -63,10 +64,8 @@ function EditNote(props) {
         justifyContent="center"
         margin="40px auto "
         alignItems="center"
-
       >
-       
-         <ValidatorForm
+        <ValidatorForm
           ref={inputRef}
           style={{ marginLeft: "1rem", width: "75%" }}
           onSubmit={updateNote}
@@ -74,8 +73,6 @@ function EditNote(props) {
           <Typography variant="h6" color="primary">
             Edit note
           </Typography>
-
-          
 
           <TextValidator
             margin="normal"
@@ -88,7 +85,9 @@ function EditNote(props) {
             onChange={handleTitleInput}
             placeholder="Title"
             validators={["required"]}
-            errorMessages={["A title  is required, Please type something here."]}
+            errorMessages={[
+              "A title  is required, Please type something here.",
+            ]}
           />
           <TextValidator
             margin="normal"

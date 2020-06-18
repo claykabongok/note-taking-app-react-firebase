@@ -1,39 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
-import firebase from "./firebase";
-import Header from "./components/Header";
-import Notes from "./components/Notes";
-
-
+import Homepage from "./components/Homepage";
+import ViewNote from "./components/ViewNote";
+import EditNote from "./components/EditNote";
+import NewNote from "./components/NewNote";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { AuthenticationProvider } from "./components/AuthenticationProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
-  const [notes, Setnotes] = useState([]);
- 
-
-  useEffect(() => {
-    const loadNotes = async () => {
-      const db = firebase.firestore();
-      return db.collection("notes").onSnapshot((snapshot) => {
-        const noteData = [];
-        snapshot.forEach((doc) =>
-          noteData.push({
-            ...doc.data(),
-            key: doc.id,
-          })
-        );
-        Setnotes(noteData);
-      });
-    };
-    loadNotes();
-  }, []);
-
   return (
-    <div class="container">
-     
-      <Header />
-    
-      <Notes notes={notes} />
-    
-    </div>
+    <AuthenticationProvider>
+      <Router>
+        <div>
+          <ProtectedRoute exact path="/" component={Homepage} />
+          <ProtectedRoute path="/viewnote/:id" component={ViewNote} />
+          <ProtectedRoute path="/newnote" component={NewNote} />
+          <ProtectedRoute path="/editnote/:id" component={EditNote} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </div>
+      </Router>
+    </AuthenticationProvider>
   );
 }
 

@@ -6,7 +6,7 @@ import { Box } from "@material-ui/core";
 import FlipMove from "react-flip-move";
 import { makeStyles } from "@material-ui/core/styles";
 import Note from "./Note";
-
+import firebase from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Notes({ notes }) {
-
-
   const classes = useStyles();
 
   return (
@@ -31,12 +29,9 @@ function Notes({ notes }) {
       <div className={classes.root}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
-            <Typography 
-            variant="h6"
-             className={classes.title}
-             color="primary"
-             >
-              My notes
+            <Typography variant="h6" className={classes.title} color="primary">
+              My notes (User: {firebase.auth().currentUser.email})
+              
             </Typography>
 
             <div className={classes.demo}>

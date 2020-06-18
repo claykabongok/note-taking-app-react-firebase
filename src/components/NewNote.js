@@ -15,6 +15,8 @@ function NewNote(props) {
   const [title, setTitle] = useState("");
   const [text, settext] = useState("");
   const inputRef=useRef("form");
+  const userUID= firebase.auth().currentUser.uid;
+ 
 
   function handleTitleInput(e) {
     setTitle(e.target.value);
@@ -26,7 +28,7 @@ function NewNote(props) {
     e.preventDefault();
 
     const db = firebase.firestore();
-    db.collection("notes")
+    db.collection(userUID)
       .add({ title: title, text: text })
       .then(() => {
         setTitle("");
