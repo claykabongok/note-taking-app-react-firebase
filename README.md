@@ -12,6 +12,14 @@ and [Firebase](https://firebase.google.com/docs/database?authuser=0)
 
 ## Demo:
 
+### sign up:
+
+<img src="https://github.com/claykabongok/note-taking-app-react-firebase/blob/master/demo/signup.jpg?raw=true" alt="Demo screen">
+
+### login:
+
+<img src="https://github.com/claykabongok/note-taking-app-react-firebase/blob/master/demo/signin.jpg?raw=true" alt="Demo screen">
+
 ### notes:
 
 <img src="https://github.com/claykabongok/note-taking-app-react-firebase/blob/master/demo/listnotes.jpg?raw=true" alt="Demo screen">
